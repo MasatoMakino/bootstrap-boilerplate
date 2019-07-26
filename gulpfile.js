@@ -50,3 +50,5 @@ const watchTasks = cb => {
   cb();
 };
 exports.watchTasks = watchTasks;
+
+exports.startServer = series(watchTasks, server);

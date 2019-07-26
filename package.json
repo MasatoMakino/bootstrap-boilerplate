@@ -28,9 +28,7 @@
   },
   "scripts": {
     "start:dev": "npm-run-all -s build:dev watch",
-    "watch:server": "gulp server",
-    "watch": "npm-run-all -p watch:*",
-    "watch:gulp": "gulp watchTasks",
+    "watch": "gulp startServer",
     "build:dev": "npm-run-all -s clean publish:build",
     "build:release": "npm-run-all -s clean publish:release",
     "clean": "gulp clean",
