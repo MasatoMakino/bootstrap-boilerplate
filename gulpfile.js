@@ -1,4 +1,5 @@
 const path = require("path");
+const rimraf = require("rimraf");
 const { series, parallel, src, dest, watch } = require("gulp");
 
 const srcDir = "./src/";
@@ -22,6 +23,11 @@ const imgDir = path.resolve(srcDir, "img");
 const images = require("gulptask-imagemin")(imgDir, distDir);
 exports.images = images;
 
+const copyGlob = "./src/**/*.+(htm|html)";
+const copy = () => {
+  return src(copyGlob, { base: srcDir }).pipe(dest(distDir));
+};
+
 const {
   bundleDevelopment,
   bundleProduction,
@@ -30,9 +36,15 @@ const {
 exports.bundleDevelopment = bundleDevelopment;
 exports.bundleProduction = bundleProduction;
 
+const clean = cb => {
+  rimraf(distDir, cb);
+};
+exports.clean = clean;
+
 const watchTasks = cb => {
   watchBundle();
   watch(ejsGlob, ejs);
+  watch(copyGlob, copy);
   watch(imgDir + "/**/*", images);
   watch(sassDir + "/**/*", sass);
   cb();
