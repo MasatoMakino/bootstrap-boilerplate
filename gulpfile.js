@@ -6,22 +6,18 @@ const srcDir = "./src/";
 const distDir = "./dist/";
 
 const server = require("gulptask-dev-server")(distDir);
-exports.server = server;
 
 const ejsGlob = srcDir + "**/*.ejs";
 const ejs = require("gulptask-ejs")([ejsGlob, "!_*.ejs"], distDir);
-exports.ejs = ejs;
 
 const sassDir = path.resolve(srcDir, "scss");
 const sass = require("gulptask-sass")(
   sassDir + "/**/style.scss",
   path.resolve(distDir, "css")
 );
-exports.sass = sass;
 
 const imgDir = path.resolve(srcDir, "img");
 const images = require("gulptask-imagemin")(imgDir, distDir);
-exports.images = images;
 
 const copyGlob = "./src/**/*.+(htm|html)";
 const copy = () => {
@@ -33,13 +29,10 @@ const {
   bundleProduction,
   watchBundle
 } = require("gulptask-webpack")("./webpack.config.js");
-exports.bundleDevelopment = bundleDevelopment;
-exports.bundleProduction = bundleProduction;
 
 const clean = cb => {
   rimraf(distDir, cb);
 };
-exports.clean = clean;
 
 const watchTasks = cb => {
   watchBundle();
@@ -49,6 +42,13 @@ const watchTasks = cb => {
   watch(sassDir + "/**/*", sass);
   cb();
 };
-exports.watchTasks = watchTasks;
+const startServer = series(watchTasks, server);
 
-exports.startServer = series(watchTasks, server);
+const generate_dev = parallel(sass, ejs, bundleDevelopment, images, copy);
+const generate_production = parallel(sass, ejs, bundleProduction, images, copy);
+
+const build_dev = series(clean, generate_dev);
+exports.build_dev = build_dev;
+exports.build_production = series(clean, generate_production);
+
+exports.start_dev = series(build_dev, startServer);
