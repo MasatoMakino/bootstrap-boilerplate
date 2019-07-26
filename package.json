@@ -16,6 +16,7 @@
     "gulptask-ejs": "https://github.com/MasatoMakino/gulptask-ejs.git",
     "gulptask-imagemin": "https://github.com/MasatoMakino/gulptask-imagemin.git",
     "gulptask-sass": "https://github.com/MasatoMakino/gulptask-sass.git",
+    "gulptask-webpack": "https://github.com/MasatoMakino/gulptask-webpack.git",
     "husky": "^3.0.1",
     "jquery": "^3.4.1",
     "lazysizes": "^5.1.0",
@@ -24,9 +25,7 @@
     "onchange": "^6.0.0",
     "popper.js": "^1.15.0",
     "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "webpack": "^4.37.0",
-    "webpack-cli": "^3.3.6"
+    "pretty-quick": "^1.11.1"
   },
   "scripts": {
     "start:dev": "npm-run-all -s build:dev watch",
@@ -38,9 +37,8 @@
     "clean": "rimraf dist",
     "sass": "gulp sass",
     "ejs": "gulp ejs",
-    "javascript:dev": "webpack --config webpack.config.script.js --mode development",
-    "watch:javascript": "npm run javascript:dev -- --watch",
-    "javascript:production": "webpack --config webpack.config.script.js --mode production --progress --color",
+    "javascript:dev": "gulp bundleDevelopment",
+    "javascript:production": "gulp bundleProduction",
     "image": "gulp images",
     "publish:build": "npm-run-all -p sass ejs javascript:dev image",
     "publish:release": "npm-run-all -p sass ejs javascript:production image"

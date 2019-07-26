@@ -22,7 +22,16 @@ const imgDir = path.resolve(srcDir, "img");
 const images = require("gulptask-imagemin")(imgDir, distDir);
 exports.images = images;
 
+const {
+  bundleDevelopment,
+  bundleProduction,
+  watchBundle
+} = require("gulptask-webpack")("./webpack.config.js");
+exports.bundleDevelopment = bundleDevelopment;
+exports.bundleProduction = bundleProduction;
+
 const watchTasks = cb => {
+  watchBundle();
   watch(ejsGlob, ejs);
   watch(imgDir + "/**/*", images);
   watch(sassDir + "/**/*", sass);
