@@ -34,6 +34,8 @@ const clean = cb => {
   rimraf(distDir, cb);
 };
 
+const revision = require("gulptask-revision")(distDir);
+
 const watchTasks = cb => {
   watchBundle();
   watch(ejsGlob, ejs);
@@ -48,7 +50,7 @@ const generate_dev = parallel(sass, ejs, bundleDevelopment, images, copy);
 const generate_production = parallel(sass, ejs, bundleProduction, images, copy);
 
 const build_dev = series(clean, generate_dev);
+const build_production = series(clean, generate_production, revision);
 exports.build_dev = build_dev;
-exports.build_production = series(clean, generate_production);
-
+exports.build_production = build_production;
 exports.start_dev = series(build_dev, startServer);
