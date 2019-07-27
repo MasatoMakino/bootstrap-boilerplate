@@ -34,5 +34,17 @@ module.exports = {
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: "initial",
+          name: "vendor",
+          test: /node_modules/,
+          enforce: true
+        }
+      }
+    }
+  }
 };
