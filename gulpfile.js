@@ -8,7 +8,7 @@ const distDir = "./dist/";
 const server = require("gulptask-dev-server")(distDir);
 
 const ejsGlob = srcDir + "**/*.ejs";
-const ejs = require("gulptask-ejs")([ejsGlob, "!_*.ejs"], distDir);
+const ejs = require("gulptask-ejs")([ejsGlob, "!./**/_*.ejs"], distDir);
 
 const sassDir = path.resolve(srcDir, "scss");
 const sass = require("gulptask-sass")(
