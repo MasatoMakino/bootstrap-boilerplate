@@ -52,7 +52,7 @@ npm run start:dev
 このボイラープレートで使用する npm scripts は以下の３つです。
 
 ```bash
-npm run コマンド名
+npm run <コマンド名>
 ```
 
 でそれぞれ実行できます。
