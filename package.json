@@ -1,7 +1,6 @@
 {
   "name": "bootstrap-boilerplate",
-  "version": "0.0.1",
-  "main": "index.js",
+  "version": "0.1.0",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
@@ -33,7 +32,7 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "repository": "git@bitbucket.org:masato_makino_bitbucket/bootstrap-boilerplate.git",
+  "repository": "git@github.com:MasatoMakino/bootstrap-boilerplate.git",
   "author": "MasatoMakino",
-  "license": "UNLICENSED"
+  "license": "MIT"
 }
