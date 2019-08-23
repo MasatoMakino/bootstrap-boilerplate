@@ -4,8 +4,8 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",
     "gulp": "^4.0.2",
@@ -15,9 +15,9 @@
     "gulptask-revision": "https://github.com/MasatoMakino/gulptask-revision.git",
     "gulptask-sass": "https://github.com/MasatoMakino/gulptask-sass.git",
     "gulptask-webpack": "https://github.com/MasatoMakino/gulptask-webpack.git",
-    "husky": "^3.0.1",
+    "husky": "^3.0.4",
     "jquery": "^3.4.1",
-    "lazysizes": "^5.1.0",
+    "lazysizes": "^5.1.1",
     "popper.js": "^1.15.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1"

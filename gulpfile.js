@@ -17,7 +17,7 @@ const sass = require("gulptask-sass")(
 );
 
 const imgDir = path.resolve(srcDir, "img");
-const images = require("gulptask-imagemin")(imgDir, distDir);
+const images = require("gulptask-imagemin").get(imgDir, distDir);
 
 const copyGlob = "./src/**/*.+(htm|html)";
 const copy = () => {
