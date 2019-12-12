@@ -5,7 +5,7 @@ const { series, parallel, src, dest, watch } = require("gulp");
 const srcDir = "./src/";
 const distDir = "./dist/";
 
-const server = require("gulptask-dev-server")(distDir);
+const server = require("gulptask-dev-server").get(distDir);
 
 const ejsGlob = srcDir + "**/*.ejs";
 const ejs = require("gulptask-ejs")([ejsGlob, "!./**/_*.ejs"], distDir);
@@ -28,7 +28,7 @@ const {
   bundleDevelopment,
   bundleProduction,
   watchBundle
-} = require("gulptask-webpack")("./webpack.config.js");
+} = require("gulptask-webpack").get({ configPath: "./webpack.config.js" });
 
 const clean = cb => {
   rimraf(distDir, cb);
