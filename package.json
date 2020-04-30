@@ -16,7 +16,7 @@
     "gulptask-sass": "https://github.com/MasatoMakino/gulptask-sass.git",
     "gulptask-webpack": "https://github.com/MasatoMakino/gulptask-webpack.git",
     "husky": "^3.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lazysizes": "^5.2.0-beta1",
     "popper.js": "^1.16.0",
     "prettier": "^1.19.1",
