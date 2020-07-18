@@ -8,10 +8,10 @@ const distDir = "./dist/";
 const server = require("gulptask-dev-server").get(distDir);
 
 const ejsGlob = srcDir + "**/*.ejs";
-const ejs = require("gulptask-ejs")([ejsGlob, "!./**/_*.ejs"], distDir);
+const ejs = require("gulptask-ejs").get([ejsGlob, "!./**/_*.ejs"], distDir);
 
 const sassDir = path.resolve(srcDir, "scss");
-const sass = require("gulptask-sass")(
+const sass = require("gulptask-sass").get(
   sassDir + "/**/style.scss",
   path.resolve(distDir, "css")
 );
@@ -27,16 +27,16 @@ const copy = () => {
 const {
   bundleDevelopment,
   bundleProduction,
-  watchBundle
+  watchBundle,
 } = require("gulptask-webpack").get({ configPath: "./webpack.config.js" });
 
-const clean = cb => {
+const clean = (cb) => {
   rimraf(distDir, cb);
 };
 
 const revision = require("gulptask-revision")(distDir);
 
-const watchTasks = cb => {
+const watchTasks = (cb) => {
   watchBundle();
   watch(ejsGlob, ejs);
   watch(copyGlob, copy);
