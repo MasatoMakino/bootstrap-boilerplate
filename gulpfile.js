@@ -34,7 +34,9 @@ const clean = (cb) => {
   rimraf(distDir, cb);
 };
 
-const revision = require("gulptask-revision")(distDir);
+const revision = require("gulptask-revision").generateTasks({
+  distDir: distDir,
+});
 
 const watchTasks = (cb) => {
   watchBundle();
