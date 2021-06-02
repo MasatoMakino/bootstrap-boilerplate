@@ -14,10 +14,11 @@ const ejs = require("gulptask-ejs").generateTask(
 );
 
 const sassDir = path.resolve(srcDir, "scss");
-const sass = require("gulptask-sass").generateTask(
-  sassDir + "/**/style.scss",
-  path.resolve(distDir, "css")
-);
+const sass = require("gulptask-sass").generateTask({
+  base: sassDir,
+  entryPoints: sassDir + "/**/style.scss",
+  distDir: path.resolve(distDir, "css"),
+});
 
 const imgDir = path.resolve(srcDir, "img");
 const images = require("gulptask-imagemin").generateTask(imgDir, distDir);
@@ -27,13 +28,10 @@ const copy = () => {
   return src(copyGlob, { base: srcDir }).pipe(dest(distDir));
 };
 
-const {
-  bundleDevelopment,
-  bundleProduction,
-  watchBundle,
-} = require("gulptask-webpack").generateTasks({
-  configPath: "./webpack.config.js",
-});
+const { bundleDevelopment, bundleProduction, watchBundle } =
+  require("gulptask-webpack").generateTasks({
+    configPath: "./webpack.config.js",
+  });
 
 const clean = (cb) => {
   rimraf(distDir, cb);
