@@ -1,10 +1,10 @@
 "use strict";
 
-import $ from "jquery/dist/jquery.js";
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
 
-import "bootstrap";
+import {} from "bootstrap";
 import lazySizes from "lazysizes";
+import { popper } from "@popperjs/core";
 
 window.onload = () => {};
