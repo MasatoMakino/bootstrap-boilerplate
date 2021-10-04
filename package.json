@@ -1,6 +1,7 @@
 {
   "name": "bootstrap-boilerplate",
   "version": "0.2.1",
+  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
