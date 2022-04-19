@@ -1,43 +1,47 @@
-const path = require("path");
-const rimraf = require("rimraf");
-const { series, parallel, src, dest, watch } = require("gulp");
+import path from "path";
+import rimraf from "rimraf";
+import gulp from "gulp";
+const { series, parallel, src, dest, watch } = gulp;
 
 const srcDir = "./src/";
 const distDir = "./dist/";
 
-const server = require("gulptask-dev-server").generateTask(distDir);
+import devServerTask from "gulptask-dev-server";
+const server = devServerTask.generateTask(distDir);
 
 const ejsGlob = srcDir + "**/*.ejs";
-const ejs = require("gulptask-ejs").generateTask(
-  [ejsGlob, "!./**/_*.ejs"],
-  distDir
-);
+import ejsTask from "gulptask-ejs";
+const ejs = ejsTask.generateTask([ejsGlob, "!./**/_*.ejs"], distDir);
 
 const sassDir = path.resolve(srcDir, "scss");
-const sass = require("gulptask-sass").generateTask({
+import sassTask from "gulptask-sass";
+const sass = sassTask.generateTask({
   base: sassDir,
   entryPoints: sassDir + "/**/style.scss",
   distDir: path.resolve(distDir, "css"),
 });
 
 const imgDir = path.resolve(srcDir, "img");
-const images = require("gulptask-imagemin").generateTask(imgDir, distDir);
+import imageminTask from "gulptask-imagemin";
+const images = imageminTask.generateTask(imgDir, distDir);
 
 const copyGlob = "./src/**/*.+(htm|html)";
 const copy = () => {
   return src(copyGlob, { base: srcDir }).pipe(dest(distDir));
 };
 
+import webpackTask from "gulptask-webpack";
 const { bundleDevelopment, bundleProduction, watchBundle } =
-  require("gulptask-webpack").generateTasks({
-    configPath: "./webpack.config.js",
+  webpackTask.generateTasks({
+    configPath: "./webpack.config.cjs",
   });
 
 const clean = (cb) => {
   rimraf(distDir, cb);
 };
 
-const revision = require("gulptask-revision").generateTasks({
+import revisionTask from "gulptask-revision";
+const revision = revisionTask.generateTasks({
   distDir: distDir,
 });
 
@@ -56,6 +60,6 @@ const generate_production = parallel(sass, ejs, bundleProduction, images, copy);
 
 const build_dev = series(clean, generate_dev);
 const build_production = series(clean, generate_production, revision);
-exports.build_dev = build_dev;
-exports.build_production = build_production;
-exports.start_dev = series(build_dev, startServer);
+const start_dev = series(build_dev, startServer);
+
+export { build_dev, build_production, start_dev };
