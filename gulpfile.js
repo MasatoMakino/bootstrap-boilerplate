@@ -23,7 +23,7 @@ const sass = sassTask.generateTask({
 
 const imgDir = path.resolve(srcDir, "img");
 import imageminTask from "gulptask-imagemin";
-const images = imageminTask.generateTask(imgDir, distDir);
+const images = imageminTask.generateTasks(imgDir, distDir);
 
 const copyGlob = "./src/**/*.+(htm|html)";
 const copy = () => {
@@ -49,14 +49,14 @@ const watchTasks = (cb) => {
   watchBundle();
   watch(ejsGlob, ejs);
   watch(copyGlob, copy);
-  watch(imgDir + "/**/*", images);
+  images.watchImages();
   watch(sassDir + "/**/*", sass);
   cb();
 };
 const startServer = series(watchTasks, server);
 
-const generate_dev = parallel(sass, ejs, bundleDevelopment, images, copy);
-const generate_production = parallel(sass, ejs, bundleProduction, images, copy);
+const generate_dev = parallel(sass, ejs, bundleDevelopment, images.optimize, copy);
+const generate_production = parallel(sass, ejs, bundleProduction, images.optimize, copy);
 
 const build_dev = series(clean, generate_dev);
 const build_production = series(clean, generate_production, revision);
