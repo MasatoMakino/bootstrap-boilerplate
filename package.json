@@ -9,7 +9,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@masatomakino/gulptask-dev-server": "^0.4.3",
     "@masatomakino/gulptask-ejs": "^0.3.3",
-    "@masatomakino/gulptask-imagemin": "^0.3.6",
+    "@masatomakino/gulptask-imagemin": "^0.3.7",
     "@masatomakino/gulptask-revision": "^0.4.1",
     "@popperjs/core": "^2.11.6",
     "babel-loader": "^9.1.2",
